@@ -1,6 +1,7 @@
+#include <stddef.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <jni.h>
-#include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <math.h>
@@ -126,6 +127,7 @@ initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][6
 				break;
 			case SANDYBRIDGE:
 			case IVYBRIDGE:
+			case KABYLAKE:
 
 
 				result = read_msr(fd[i],MSR_PP1_ENERGY_STATUS);
@@ -200,6 +202,7 @@ JNIEXPORT jstring JNICALL Java_EnergyCheckUtils_EnergyStatCheck(JNIEnv *env,
 				break;	
 			case SANDYBRIDGE:
 			case IVYBRIDGE:
+			case KABYLAKE:
 
 				gpu_num = strlen(gpu_buffer[i]);		
 				cpu_num = strlen(cpu_buffer[i]);
@@ -225,7 +228,7 @@ JNIEXPORT jstring JNICALL Java_EnergyCheckUtils_EnergyStatCheck(JNIEnv *env,
 				
 				break;
 		default:
-				printf("non of archtectures are detected\n");
+				printf("non of archtectures are detected. Signature found: %02x\n",cpu_model);
 				break;
 
 
