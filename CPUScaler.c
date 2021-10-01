@@ -128,7 +128,7 @@ initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][6
 			case SANDYBRIDGE:
 			case IVYBRIDGE:
 			case KABYLAKE:
-
+			case COFFELAKE:
 
 				result = read_msr(fd[i],MSR_PP1_ENERGY_STATUS);
 				pp1[i] = (double) result *rapl_unit.energy;
@@ -203,6 +203,7 @@ JNIEXPORT jstring JNICALL Java_EnergyCheckUtils_EnergyStatCheck(JNIEnv *env,
 			case SANDYBRIDGE:
 			case IVYBRIDGE:
 			case KABYLAKE:
+			case COFFELAKE:
 
 				gpu_num = strlen(gpu_buffer[i]);		
 				cpu_num = strlen(cpu_buffer[i]);
